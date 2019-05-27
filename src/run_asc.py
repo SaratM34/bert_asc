@@ -183,7 +183,7 @@ def test(args):  # Load a trained model that you have fine-tuned (we assume eval
         logits = logits.detach().cpu().numpy()
         label_ids = label_ids.cpu().numpy()
 
-        full_logits.extend(logits.tolist())
+        full_logits.extend(np.argmax(logits.tolist()))
         full_label_ids.extend(label_ids.tolist())
 
     output_eval_json = os.path.join(args.output_dir, "predictions.json")
