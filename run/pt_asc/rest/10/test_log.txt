@@ -1,0 +1,4 @@
+05/26/2019 21:53:20 - INFO - pytorch_pretrained_bert.tokenization -   loading vocabulary file ../pt_model/rest_pt/vocab.txt
+05/26/2019 21:53:21 - INFO - __main__ -   ***** Running evaluation *****
+05/26/2019 21:53:21 - INFO - __main__ -     Num examples = 1120
+05/26/2019 21:53:21 - INFO - __main__ -     Batch size = 8
