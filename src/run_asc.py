@@ -173,6 +173,7 @@ def test(args):  # Load a trained model that you have fine-tuned (we assume eval
 
     full_logits = []
     full_label_ids = []
+    final_out = []
     for step, batch in enumerate(eval_dataloader):
         batch = tuple(t.cuda() for t in batch)
         input_ids, segment_ids, input_mask, label_ids = batch
@@ -183,12 +184,14 @@ def test(args):  # Load a trained model that you have fine-tuned (we assume eval
         logits = logits.detach().cpu().numpy()
         label_ids = label_ids.cpu().numpy()
 
-        full_logits.extend(np.argmax(logits.tolist()))
+        full_logits.extend(logits.tolist())
         full_label_ids.extend(label_ids.tolist())
 
     output_eval_json = os.path.join(args.output_dir, "predictions.json")
+    for item in full_logits:
+        final_out.append(np.argmax(item))
     with open(output_eval_json, "w") as fw:
-        json.dump({"logits": full_logits, "label_ids": full_label_ids}, fw)
+        json.dump({"logits": str(final_out), "label_ids": full_label_ids}, fw)
 
 
 def main():
